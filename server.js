@@ -38,6 +38,7 @@ const adminRoutes = require('./routes/admin');
 
 // 3. Helper Utilitas
 const { formatDate, formatDateShort, gradeColor } = require('./utils/helpers');
+const autoInitDatabase = require('./scripts/auto-migrate');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -150,15 +151,17 @@ app.use((err, req, res, next) => {
 // ============================================================
 // START APPLICATION SERVER
 // ============================================================
-app.listen(PORT, () => {
-  console.log(`
+async function startServer() {
+  await autoInitDatabase();
+
+  app.listen(PORT, () => {
+    console.log(`
 ==============================================================
    SIAKAD UNIVERSITAS MARITIM RAJA ALI HAJI (UMRAH)
    Fakultas Teknik dan Teknologi Kemaritiman - Teknik Informatika
 ==============================================================
    Status Server : Berjalan pada http://localhost:${PORT}
    Arsitektur    : Zero Trust, Parameterized Query, RBAC
-   Database      : MySQL 127.0.0.1:3306 (siakad_db)
    Keamanan Aktif:
    - R-01 : Autentikasi (bcrypt salt 12, Rate Limit 5x, Lockout 15m)
    - R-02 : Integritas Nilai (Server-side validation & queries)
@@ -169,8 +172,11 @@ app.listen(PORT, () => {
    - R-07 : Sesi (Regenerasi session ID & Timeout 30 menit)
    - R-08 : Backup & Restore (scripts/backup.js)
 ==============================================================
-  `);
-});
+    `);
+  });
+}
+
+startServer();
 
 module.exports = app;
 

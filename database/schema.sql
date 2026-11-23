@@ -5,9 +5,6 @@
 -- Keamanan: Laporan PJBL PKSJ Fase 1 & Fase 2
 -- ============================================================
 
-CREATE DATABASE IF NOT EXISTS siakad_dbs CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE siakad_dbs;
-
 -- 1. Tabel Users (A-02: Basis data akun pengguna)
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
