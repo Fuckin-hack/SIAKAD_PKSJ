@@ -28,12 +28,6 @@ Aplikasi Web Sistem Informasi Akademik (SIAKAD) untuk **Fakultas Teknik dan Tekn
 | **R-07** | **12 (Sedang)** | Manajemen Sesi & Anti-Fixation | Regenerasi Session ID saat login, idle session timeout 30 menit, pembatalan sesi saat logout | **SR-09 / CT-06**: Sesi yang telah logout atau kedaluwarsa segera dibatalkan dan tidak bisa dipakai ulang. |
 | **R-08** | **10 (Sedang)** | Backup & Pemulihan Basis Data | Script cadangan `scripts/backup.js` snapshot database terisolasi | **SR-08 / CT-09**: Cadangan data tersimpan dengan waktu pembuatan untuk kepastian restore. |
 
----
-
-## 👥 Data Akun Dummy (Sesuai Dokumen Laporan)
-
-Seluruh akun dummy menggunakan password default: **`Password123!`**
-
 | No | Peran | Username / NIM | Nama Lengkap | Keterangan / Scope Akses |
 | :---: | :--- | :--- | :--- | :--- |
 | 1 | **Admin** | `admin` | Administrator SIAKAD UMRAH | Manajemen akun, pembukaan lockout, Audit Log viewer |
@@ -43,33 +37,6 @@ Seluruh akun dummy menggunakan password default: **`Password123!`**
 | 5 | **Mahasiswa** | `2301020031` | Imelda Cristina Sinaga | Mahasiswa Semester 5 (Angkatan 2023) |
 | 6 | **Mahasiswa** | `2301020099` | Laila Amelia Ulva | Mahasiswa Semester 5 (Angkatan 2023) |
 | 7 | **Mahasiswa** | `2301020125` | Alfin Rifaldy Siregar | Mahasiswa Semester 5 (Angkatan 2023) |
-
----
-
-## 🚀 Panduan Menjalankan Sistem
-
-### 1. Prasyarat:
-- **Node.js**: Versi 18 atau lebih tinggi
-- **MySQL / MariaDB**: XAMPP MySQL berjalan di port `3306`
-
-### 2. Inisialisasi Database:
-Jalankan perintah berikut untuk membuat database `siakad_db`, seluruh tabel, dan seed data dummy:
-```bash
-npm run init-db
-```
-
-### 3. Menjalankan Server:
-```bash
-npm start
-```
-Buka browser dan akses: **`http://localhost:3000`**
-
-### 4. Menjalankan Backup (R-08):
-```bash
-npm run backup
-```
-
----
 
 ## 🧪 Skenario Pengujian Validasi (Challenge Test - Bab V Laporan Fase 2)
 
