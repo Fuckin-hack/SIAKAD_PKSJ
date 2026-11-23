@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+
+# Logs & Runtime data
+logs/
+*.log
+backups/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker runtime (optional)
+mysql-data/
+
+# Backup SQL dumps
+*.sql
+!database/schema.sql
