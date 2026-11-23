@@ -7,11 +7,25 @@ const fs = require('fs');
 const path = require('path');
 
 async function autoInitDatabase() {
-  const host = process.env.DB_HOST || '127.0.0.1';
-  const port = parseInt(process.env.DB_PORT) || 3306;
-  const user = process.env.DB_USER || 'root';
-  const password = process.env.DB_PASSWORD || '';
-  const database = process.env.DB_NAME || 'siakad_db';
+  let host = process.env.DB_HOST || process.env.MYSQLHOST || '127.0.0.1';
+  let port = parseInt(process.env.DB_PORT || process.env.MYSQLPORT) || 3306;
+  let user = process.env.DB_USER || process.env.MYSQLUSER || 'root';
+  let password = process.env.DB_PASSWORD || process.env.MYSQLPASSWORD || '';
+  let database = process.env.DB_NAME || process.env.MYSQLDATABASE || 'siakad_db';
+
+  const connUrl = process.env.MYSQL_URL || process.env.DATABASE_URL;
+  if (connUrl && !process.env.DB_HOST && !process.env.MYSQLHOST) {
+    try {
+      const parsed = new URL(connUrl);
+      host = parsed.hostname;
+      port = parseInt(parsed.port) || 3306;
+      user = decodeURIComponent(parsed.username);
+      password = decodeURIComponent(parsed.password);
+      database = parsed.pathname.replace(/^\//, '');
+    } catch (e) {
+      console.warn('⚠️ Gagal parse connection URL:', e.message);
+    }
+  }
 
   console.log(`🔍 [Database Check] Menghubungkan ke MySQL (${host}:${port}/${database})...`);
 
